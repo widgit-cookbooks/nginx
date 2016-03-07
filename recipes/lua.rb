@@ -42,6 +42,8 @@ bash 'extract_luajit' do
   not_if { ::File.exist?(luajit_extract_path) }
 end
 
-package 'lua-devel' do
-  action :install
+if node.platform_family? 'debian'
+  package 'liblua5.1-dev'
+else
+  package 'lua-devel'
 end
