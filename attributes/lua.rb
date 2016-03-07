@@ -19,9 +19,9 @@
 # limitations under the License.
 #
 
-default['nginx']['lua']['version']  = '0.10.0'
+default['nginx']['lua']['version']  = '0.10.1rc1'
 default['nginx']['lua']['url']      = "https://github.com/openresty/lua-nginx-module/archive/v#{node['nginx']['lua']['version']}.tar.gz"
-default['nginx']['lua']['checksum'] = 'cf31c64b107a54999fdf8b68e8b8d52d88a3c95d9307417f049c32c5687ed780'
+default['nginx']['lua']['checksum'] = '7b741a45ba8c66972fc7261cd191bdc89179ad9cebbc5af59c899c56811b8838'
 
 default['nginx']['luajit']['version']  = '2.0.4'
 default['nginx']['luajit']['url']	     = "http://luajit.org/download/LuaJIT-#{node['nginx']['luajit']['version']}.tar.gz"
