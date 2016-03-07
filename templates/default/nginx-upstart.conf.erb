@@ -30,6 +30,7 @@ console output
 script
   . /etc/nginx/passenger_environment
   export PASSENGER_APP_ENV
+  echo "passenger_app_env $PASSENGER_APP_ENV;" > /etc/nginx/conf.d/passenger-app-env.conf
   exec ${DAEMON} -c "${CONFIG}"
 end script
 
