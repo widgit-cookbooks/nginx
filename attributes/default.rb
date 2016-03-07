@@ -36,6 +36,8 @@ default['nginx']['ulimit']       = '1024'
 
 default['nginx']['pid'] = '/var/run/nginx.pid'
 
+default['nginx']['env'] = {}
+
 case node['platform_family']
 when 'debian'
   default['nginx']['user']       = 'www-data'

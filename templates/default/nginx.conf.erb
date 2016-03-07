@@ -1,3 +1,7 @@
+<% node['nginx']['env'].keys.each do |env| -%>
+env <%= env.to_s %><%= node['nginx']['env'][env].nil? ? '' : "=#{node['nginx']['env'][env]}" %>;
+<% end -%>
+
 user <%= node['nginx']['user'] %><% if node['nginx']['user'] != node['nginx']['group'] %> <%= node['nginx']['group'] %><% end %>;
 worker_processes  <%= node['nginx']['worker_processes'] %>;
 <% if node['nginx']['daemon_disable'] -%>
