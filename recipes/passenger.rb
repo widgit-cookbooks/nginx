@@ -43,7 +43,7 @@ elsif node['nginx']['passenger']['install_method'] == 'source'
   end
 
   node.run_state['nginx_configure_flags'] =
-    node.run_state['nginx_configure_flags'] | ["--add-module=#{node['nginx']['passenger']['root']}/ext/nginx"]
+    node.run_state['nginx_configure_flags'] | ["--add-module=#{node['nginx']['passenger']['root']}/src/nginx_module"]
 
 end
 

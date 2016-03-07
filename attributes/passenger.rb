@@ -20,7 +20,7 @@
 # limitations under the License.
 #
 
-node.default['nginx']['passenger']['version'] = '4.0.57'
+node.default['nginx']['passenger']['version'] = '5.0.26'
 
 if node['nginx']['repo_source'] == 'passenger'
   node.default['nginx']['passenger']['root'] = '/usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini'
