@@ -27,7 +27,11 @@ expect fork
 console output
 <% end %>
 
-exec ${DAEMON} -c "${CONFIG}"
+script
+  . /etc/nginx/passenger_environment
+  export PASSENGER_APP_ENV
+  exec ${DAEMON} -c "${CONFIG}"
+end script
 
 <% if node.recipe?('nginx::passenger') and not node['nginx']['upstart']['foreground'] %>
 # classic example of why pidfiles should have gone away

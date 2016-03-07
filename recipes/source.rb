@@ -156,6 +156,13 @@ when 'upstart'
     mode   '0644'
   end
 
+  template '/etc/nginx/passenger_environment' do
+    source 'passenger_environment'
+    owner 'root'
+    group node['root_group']
+    mode '0644'
+  end
+
   service 'nginx' do
     provider Chef::Provider::Service::Upstart
     supports :status => true, :restart => true, :reload => true
