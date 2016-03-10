@@ -116,6 +116,13 @@ bash 'compile_nginx_source' do
   notifies :reload,  'ohai[reload_nginx]', :immediately
 end
 
+template '/etc/nginx/passenger_environment' do
+  source 'passenger_environment'
+  owner 'root'
+  group node['root_group']
+  mode '0644'
+end
+
 case node['nginx']['init_style']
 when 'runit'
   node.set['nginx']['src_binary'] = node['nginx']['binary']
@@ -154,13 +161,6 @@ when 'upstart'
     owner  'root'
     group  node['root_group']
     mode   '0644'
-  end
-
-  template '/etc/nginx/passenger_environment' do
-    source 'passenger_environment'
-    owner 'root'
-    group node['root_group']
-    mode '0644'
   end
 
   service 'nginx' do
