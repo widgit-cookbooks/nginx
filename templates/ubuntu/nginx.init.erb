@@ -21,6 +21,9 @@ if [ -f /etc/default/nginx ]; then
 	. /etc/default/nginx
 fi
 
+# Passenger config
+. /etc/nginx/passenger_environment
+
 test -x $DAEMON || exit 0
 
 set -e
@@ -39,6 +42,7 @@ test_nginx_config() {
 case "$1" in
 	start)
 		echo -n "Starting $DESC: "
+		echo "passenger_app_env $PASSENGER_APP_ENV;" > /etc/nginx/conf.d/passenger-app-env.conf
 		test_nginx_config
 		# Check if the ULIMIT is set in /etc/default/nginx
 		if [ -n "$ULIMIT" ]; then
@@ -62,6 +66,7 @@ case "$1" in
 		start-stop-daemon --stop --quiet --pidfile \
 		    $PID --exec $DAEMON || true
 		sleep 1
+		echo "passenger_app_env $PASSENGER_APP_ENV;" > /etc/nginx/conf.d/passenger-app-env.conf
 		test_nginx_config
 		start-stop-daemon --start --quiet --pidfile \
 		    $PID --exec $DAEMON -- $DAEMON_OPTS || true
@@ -70,6 +75,7 @@ case "$1" in
 
 	reload)
 		echo -n "Reloading $DESC configuration: "
+		echo "passenger_app_env $PASSENGER_APP_ENV;" > /etc/nginx/conf.d/passenger-app-env.conf
 		test_nginx_config
 		start-stop-daemon --stop --signal HUP --quiet --pidfile $PID \
 		    --exec $DAEMON || true
